@@ -40,7 +40,7 @@ public class MovieServiceImpl implements MovieService {
             if (response.statusCode() == 200) {
                 SearchResponse searchResponse = objectMapper.readValue(response.body(), SearchResponse.class);
 
-                // For each movie, fetch its trailer URL
+              
                 for (Movie movie : searchResponse.getResults()) {
                     String trailerUrl = getTrailerUrl(movie.getId());
                     movie.setTrailerUrl(trailerUrl);
@@ -148,28 +148,27 @@ public class MovieServiceImpl implements MovieService {
     public String getTrailerUrl(int movieId) {
         List<Video> videos = getMovieVideos(movieId);
 
-        // First try to find an official trailer
+
         for (Video video : videos) {
             if ("Trailer".equals(video.getType()) && video.isOfficial() && "YouTube".equals(video.getSite())) {
                 return "https://www.youtube.com/watch?v=" + video.getKey();
             }
         }
 
-        // If no official trailer, find any trailer
+     
         for (Video video : videos) {
             if ("Trailer".equals(video.getType()) && "YouTube".equals(video.getSite())) {
                 return "https://www.youtube.com/watch?v=" + video.getKey();
             }
         }
 
-        // If no trailer, find any video (clip, teaser, etc.)
+
         for (Video video : videos) {
             if ("YouTube".equals(video.getSite())) {
                 return "https://www.youtube.com/watch?v=" + video.getKey();
             }
         }
 
-        // No video found
         return "No trailer available";
     }
 }

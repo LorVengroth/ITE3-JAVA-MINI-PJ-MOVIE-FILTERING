@@ -21,7 +21,7 @@ public class Main {
             System.out.println("=== TMDB Movie App ===");
 
             while (true) {
-                // If no search has been performed or user pressed 'b' (back)
+               
                 if (currentQuery.isEmpty()) {
                     System.out.print("\n[-] Enter movie title: ");
                     currentQuery = scanner.nextLine().trim();
@@ -52,11 +52,11 @@ public class Main {
                     );
                 }
 
-                // Get user option
+             
                 String option = scanner.nextLine().trim().toLowerCase();
 
                 switch (option) {
-                    case "n": // Next page
+                    case "n": 
                         if (currentPage < totalPages) {
                             currentPage++;
                             currentSearchResponse = movieService.searchMovies(currentQuery, currentPage);
@@ -79,7 +79,7 @@ public class Main {
                         }
                         break;
 
-                    case "p": // Previous page
+                    case "p": 
                         if (currentPage > 1) {
                             currentPage--;
                             currentSearchResponse = movieService.searchMovies(currentQuery, currentPage);
@@ -102,7 +102,7 @@ public class Main {
                         }
                         break;
 
-                    case "b": // Back to search
+                    case "b": 
                         currentQuery = "";
                         currentPage = 1;
                         totalPages = 0;
@@ -111,7 +111,7 @@ public class Main {
                         System.out.println("\nGoing back to search...\n");
                         break;
 
-                    case "g": // Go to specific page
+                    case "g": 
                         System.out.print("[-] Enter page number (1-" + totalPages + "): ");
                         try {
                             int pageNum = Integer.parseInt(scanner.nextLine().trim());
@@ -146,14 +146,14 @@ public class Main {
                         }
                         break;
 
-                    case "md": // Movie detail
+                    case "md": 
                         System.out.print("[-] Enter movie id: ");
                         try {
                             int movieId = Integer.parseInt(scanner.nextLine().trim());
                             MovieDetail detail = movieService.getMovieDetails(movieId);
                             TableFormatter.displayMovieDetail(detail);
 
-                            // After showing details, redisplay the current search results
+                        
                             System.out.println("\nPress Enter to continue...");
                             scanner.nextLine();
                             TableFormatter.displaySearchResults(
@@ -173,7 +173,7 @@ public class Main {
                         }
                         break;
 
-                    case "e": // Exit
+                    case "e": 
                         System.out.println("Goodbye!");
                         scanner.close();
                         System.exit(0);

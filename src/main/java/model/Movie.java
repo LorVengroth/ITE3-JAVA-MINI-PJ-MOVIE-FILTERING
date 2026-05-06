@@ -55,7 +55,7 @@ public class Movie {
         @JsonProperty("original_language")
         private String originalLanguage;
 
-        // This field is NOT from search API — will be added separately from videos endpoint
+
         private String trailerUrl;
     }
 
